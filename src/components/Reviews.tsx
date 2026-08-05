@@ -67,10 +67,12 @@ export default function Reviews() {
                   (placeholder review)
                 </span>
               )}
-              <span className="font-normal text-slate-muted">
-                {" "}
-                &middot; {testimonial.location}
-              </span>
+              {testimonial.location && (
+                <span className="font-normal text-slate-muted">
+                  {" "}
+                  &middot; {testimonial.location}
+                </span>
+              )}
             </p>
           </motion.div>
         ))}
