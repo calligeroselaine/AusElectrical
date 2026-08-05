@@ -8,8 +8,9 @@ this site goes live for a real customer.
 - [ ] Replace `/public/images/hero-home.jpg` with a real, licensed photo
   of a modern Australian home exterior at dusk (used in
   [Hero.tsx](src/components/Hero.tsx)).
-- [ ] Replace `/public/images/nick-portrait.jpg` with a real photo of
-  Nick (used in [About.tsx](src/components/About.tsx)).
+- [x] Nick doesn't want his photo used. The About section now shows a
+  stat panel (years experience + name) instead of a portrait — no photo
+  needed here.
 - [ ] The navbar currently uses a text wordmark ("AUS Electrical", from
   `siteConfig.shortName`) rather than an image logo. If a real logo file
   is designed, swap the wordmark in [Navbar.tsx](src/components/Navbar.tsx)
@@ -38,11 +39,9 @@ this site goes live for a real customer.
 - [ ] Replace the placeholder years-of-experience figure ("10+ Years
   Experience") in [src/data/about.ts](src/data/about.ts) with Nick's
   actual number of years in the trade.
-- [ ] Replace the 2 placeholder testimonials in
-  [src/data/testimonials.ts](src/data/testimonials.ts) (marked
-  `placeholder: true`, currently rendering a visible "(placeholder
-  review)" tag on the homepage and `/reviews`) with real customer
-  reviews.
+- [x] Both testimonials in [src/data/testimonials.ts](src/data/testimonials.ts)
+  are now real reviews (George C. and Elaine T.) — no placeholders left.
+  Add more real reviews here as they come in.
 - [ ] Double-check the structured address fields in
   [site-config.ts](src/lib/site-config.ts) (`addressStreet`,
   `addressSuburb`, `addressState`, `addressPostcode`, `addressCountry`)
@@ -71,8 +70,7 @@ this site goes live for a real customer.
   [sitemap.ts](src/app/sitemap.ts).
 
 `/reviews` is already real (reads from `testimonials.ts`) and is
-included in the sitemap as-is — it just needs the placeholder
-testimonials swapped out per above.
+included in the sitemap as-is.
 
 ## Quote form (`/quote`)
 - [ ] The quote form ([QuoteForm.tsx](src/components/QuoteForm.tsx)) is

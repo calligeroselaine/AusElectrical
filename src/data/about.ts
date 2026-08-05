@@ -17,4 +17,7 @@ export const about = {
     { icon: "ShieldCheck", label: "Licensed & Insured" },
     { icon: "MapPin", label: "Sydney Owned & Operated" },
   ] satisfies CredibilityMarker[],
+  // TODO: replace with Nick's real years of experience before launch
+  statValue: "10+",
+  statLabel: "Years Experience",
 };

@@ -21,12 +21,4 @@ export const testimonials: Testimonial[] = [
       "Nick is our go-to electrician. He's knowledgeable, reliable, reasonably priced, and always does a fantastic job. He's friendly, easy to deal with, and we have complete confidence recommending him to family and friends.",
     rating: 5,
   },
-  {
-    name: "Sample Client",
-    location: "St George",
-    quote:
-      "Placeholder testimonial - replace with a real customer review before launch.",
-    rating: 5,
-    placeholder: true,
-  },
 ];

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Award, MapPin, Phone, ShieldCheck, type LucideIcon } from "lucide-react";
 import { about } from "@/data/about";
@@ -49,14 +48,23 @@ export default function About() {
             aria-hidden="true"
             className="absolute -bottom-6 -right-6 -z-10 h-32 w-32 rounded-full bg-emerald/10"
           />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card">
-            {/* TODO: replace with a real photo of Nick before launch */}
-            <Image
-              src="/images/nick-portrait.jpg"
-              alt={`${siteConfig.ownerName}, licensed electrician and owner of ${siteConfig.businessName}`}
-              fill
-              className="object-cover"
-            />
+          <div className="relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden rounded-3xl bg-charcoal px-8 text-center shadow-card">
+            <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold/10 text-gold">
+              <ShieldCheck className="h-10 w-10" aria-hidden="true" />
+            </span>
+            <p className="mt-8 font-display text-6xl font-bold text-white">
+              {about.statValue}
+            </p>
+            <p className="mt-2 text-sm font-medium uppercase tracking-widest text-white/70">
+              {about.statLabel}
+            </p>
+            <div className="mt-8 h-px w-16 bg-white/20" aria-hidden="true" />
+            <p className="mt-8 font-display text-lg font-semibold text-white">
+              {siteConfig.ownerName}
+            </p>
+            <p className="mt-1 text-sm text-white/60">
+              Owner &amp; Licensed Electrician
+            </p>
           </div>
         </motion.div>
 
