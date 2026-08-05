@@ -5,38 +5,49 @@ import { Phone, Send } from "lucide-react";
 import { services } from "@/data/services";
 import { siteConfig } from "@/lib/site-config";
 
+type Status = "idle" | "submitting" | "success" | "error";
+
 export default function QuoteForm() {
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
 
-    const name = formData.get("name")?.toString().trim() ?? "";
-    const phone = formData.get("phone")?.toString().trim() ?? "";
-    const email = formData.get("email")?.toString().trim() ?? "";
-    const suburb = formData.get("suburb")?.toString().trim() ?? "";
-    const service = formData.get("service")?.toString().trim() ?? "";
-    const details = formData.get("details")?.toString().trim() ?? "";
+    const payload = {
+      name: formData.get("name")?.toString().trim() ?? "",
+      phone: formData.get("phone")?.toString().trim() ?? "",
+      email: formData.get("email")?.toString().trim() ?? "",
+      suburb: formData.get("suburb")?.toString().trim() ?? "",
+      service: formData.get("service")?.toString().trim() ?? "",
+      details: formData.get("details")?.toString().trim() ?? "",
+    };
 
-    const subject = `Quote request from ${name || "website visitor"}`;
-    const body = [
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Email: ${email}`,
-      `Suburb: ${suburb}`,
-      `Service needed: ${service}`,
-      "",
-      "Details:",
-      details,
-    ].join("\n");
+    setStatus("submitting");
+    setErrorMessage(null);
 
-    const mailtoUrl = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.error ?? "Something went wrong. Please try again.");
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      );
+    }
   };
 
   const inputClasses =
@@ -156,23 +167,29 @@ export default function QuoteForm() {
 
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald px-8 py-4 font-display text-base font-medium text-white shadow-card transition-colors duration-200 hover:bg-gold hover:text-charcoal sm:w-auto"
+          disabled={status === "submitting"}
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-emerald px-8 py-4 font-display text-base font-medium text-white shadow-card transition-colors duration-200 hover:bg-gold hover:text-charcoal disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
         >
           <Send className="h-5 w-5" aria-hidden="true" />
-          Send Quote Request
+          {status === "submitting" ? "Sending..." : "Send Quote Request"}
         </button>
 
-        {submitted && (
-          <p role="status" className="text-sm text-slate-muted">
-            Your email app should have opened with the details filled in —
-            just hit send. If nothing opened,{" "}
+        {status === "success" && (
+          <p role="status" className="text-sm font-medium text-emerald">
+            Thanks — your request has been sent. We'll be in touch shortly.
+          </p>
+        )}
+
+        {status === "error" && (
+          <p role="alert" className="text-sm text-red-700">
+            {errorMessage}{" "}
             <a
               href={siteConfig.phoneHref}
-              className="font-medium text-emerald hover:text-gold-dark"
+              className="font-medium underline hover:text-gold-dark"
             >
-              give us a call
-            </a>{" "}
-            instead.
+              Call us instead
+            </a>
+            .
           </p>
         )}
       </form>

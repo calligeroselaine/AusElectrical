@@ -34,8 +34,8 @@ this site goes live for a real customer.
 - [ ] Set the real `siteUrl` in [site-config.ts](src/lib/site-config.ts)
   — currently `https://www.auselectricalandair.com.au`, unverified as
   the actual production domain.
-- [ ] Set the real `email` in [site-config.ts](src/lib/site-config.ts) —
-  currently a placeholder address.
+- [x] `email` in [site-config.ts](src/lib/site-config.ts) is set to the
+  real address: `auselectricalandair@gmail.com`.
 - [ ] Replace the placeholder years-of-experience figure ("10+ Years
   Experience") in [src/data/about.ts](src/data/about.ts) with Nick's
   actual number of years in the trade.
@@ -73,12 +73,17 @@ this site goes live for a real customer.
 included in the sitemap as-is.
 
 ## Quote form (`/quote`)
-- [ ] The quote form ([QuoteForm.tsx](src/components/QuoteForm.tsx)) is
-  functional but submits via a `mailto:` link (opens the visitor's email
-  app pre-filled with their details) rather than a real backend. This
-  works with zero setup, but has real limitations: it fails silently if
-  the visitor has no email client configured (e.g. on some mobile
-  browsers), and there's no server-side record of submissions. Before
-  relying on this for real leads, consider wiring it to a proper backend
-  — an API route emailing via Resend/SendGrid, or a form service like
-  Formspree — so submissions are reliable and logged.
+- [x] The quote form ([QuoteForm.tsx](src/components/QuoteForm.tsx)) posts
+  to a real API route ([src/app/api/quote/route.ts](src/app/api/quote/route.ts))
+  that emails submissions to `siteConfig.email` via
+  [Resend](https://resend.com). The `RESEND_API_KEY` is set locally in
+  `.env.local` (gitignored).
+- [ ] **Add `RESEND_API_KEY` in Vercel too** — Project Settings →
+  Environment Variables → same value as `.env.local` — otherwise every
+  submission fails in production with "Quote form is not configured yet."
+- [ ] The route currently sends from Resend's shared sandbox address
+  (`onboarding@resend.dev`), which works without any domain setup. For a
+  more professional "from" address (e.g. `noreply@auselectricalandair.com.au`)
+  and better inbox deliverability, verify the real domain in the Resend
+  dashboard and update the `from` field in
+  [src/app/api/quote/route.ts](src/app/api/quote/route.ts).

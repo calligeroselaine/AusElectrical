@@ -4,7 +4,7 @@ export const siteConfig = {
   ownerName: "Nick Sifniotis",
   phoneDisplay: "0403 337 877",
   phoneHref: "tel:+61403337877",
-  email: "info@auselectricalandair.com.au",
+  email: "auselectricalandair@gmail.com",
   abn: "98414090797",
   licenceNo: "172584 C",
   address: "929 Forest Rd, Lugarno NSW 2210",
