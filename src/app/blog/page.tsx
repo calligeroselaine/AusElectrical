@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Blog",
   description: "Electrical tips and news — blog coming soon.",
   robots: { index: false, follow: true },
+  alternates: {
+    canonical: "/blog",
+  },
 };
 
 export default function BlogIndexPage() {

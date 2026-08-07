@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Book Online",
   description: "Online booking is coming soon.",
   robots: { index: false, follow: true },
+  alternates: {
+    canonical: "/booking",
+  },
 };
 
 export default function BookingPage() {

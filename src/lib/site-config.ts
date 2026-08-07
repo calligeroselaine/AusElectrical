@@ -25,7 +25,7 @@ export const siteConfig = {
     "Hills District",
     "South West Sydney",
   ],
-  siteUrl: "https://www.auselectricalandair.com.au",
+  siteUrl: "https://www.auselectricalair.com.au",
   tagline:
     "Reliable residential and commercial electrical services delivered with honest advice, quality workmanship and exceptional customer service.",
 } as const;

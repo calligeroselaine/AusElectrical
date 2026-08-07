@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import ServiceCard from "@/components/ServiceCard";
 import { services } from "@/data/services";
 import { siteConfig } from "@/lib/site-config";
@@ -8,12 +9,16 @@ export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Our Electrical Services",
   description: `From ${services[0].title.toLowerCase()} to ${services[services.length - 1].title.toLowerCase()}, explore the full range of residential and commercial electrical services offered by ${siteConfig.businessName} across ${siteConfig.serviceAreas.join(", ")}.`,
+  alternates: {
+    canonical: "/services",
+  },
 };
 
 export default function ServicesPage() {
   return (
     <main className="mx-auto max-w-8xl px-6 py-24 md:px-10">
-      <div className="mx-auto max-w-2xl text-center">
+      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Services", href: "/services" }]} />
+      <div className="mx-auto mt-8 max-w-2xl text-center">
         <h1 className="text-4xl font-bold text-slate md:text-5xl">
           Our Electrical Services
         </h1>

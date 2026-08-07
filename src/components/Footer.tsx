@@ -6,8 +6,9 @@ const quickLinks = [
   { label: "Home", href: "#hero" },
   { label: "Services", href: "/services" },
   { label: "About", href: "#about" },
+  { label: "Service Areas", href: "/service-areas" },
   { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const resourceLinks = [
@@ -103,13 +104,26 @@ export default function Footer() {
         <p className="text-xs leading-relaxed text-white/50">
           Proudly servicing {siteConfig.serviceAreas.join(", ")}.
         </p>
-        <div className="mt-4 flex flex-col gap-2 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-4 flex flex-col gap-3 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             &copy; {year} {siteConfig.businessName}. All rights reserved.
+            {" "}Licence No. {siteConfig.licenceNo} &middot; ABN{" "}
+            {siteConfig.abn}
           </p>
-          <p>
-            Licence No. {siteConfig.licenceNo} &middot; ABN {siteConfig.abn}
-          </p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy-policy"
+              className="transition-colors duration-200 hover:text-white"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="transition-colors duration-200 hover:text-white"
+            >
+              Terms of Use
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

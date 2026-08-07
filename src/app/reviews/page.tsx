@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import { Star } from "lucide-react";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { testimonials } from "@/data/testimonials";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Customer Reviews",
   description: `Read what customers say about ${siteConfig.businessName}.`,
+  alternates: {
+    canonical: "/reviews",
+  },
 };
 
 export default function ReviewsPage() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-24 md:px-10">
-      <div className="text-center">
+      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }]} />
+      <div className="mt-8 text-center">
         <h1 className="text-4xl font-bold text-slate md:text-5xl">
           Customer Reviews
         </h1>

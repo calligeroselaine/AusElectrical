@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import QuoteForm from "@/components/QuoteForm";
 import { siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: "Get a Quote",
   description: `Request a free quote from ${siteConfig.businessName}. Tell us about your job and we'll get back to you with a price.`,
+  alternates: {
+    canonical: "/quote",
+  },
 };
 
 export default function QuotePage() {
   return (
     <main className="bg-mist px-6 py-24 md:px-10 md:py-32">
-      <div className="mx-auto max-w-2xl text-center">
+      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: "Get a Quote", href: "/quote" }]} />
+      <div className="mx-auto mt-8 max-w-2xl text-center">
         <h1 className="text-4xl font-bold text-slate md:text-5xl">
           Get a Quote
         </h1>

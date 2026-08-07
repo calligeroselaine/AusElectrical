@@ -24,24 +24,28 @@ this site goes live for a real customer.
   [src/data/services.ts](src/data/services.ts) — the field exists in the
   data model but isn't wired into the `/services/[slug]` page template
   yet; add the `<Image>` when real photos are available.
-- [ ] Add a real `favicon.ico` to `/src/app` (or `/public`) — none exists
-  yet, so browsers are currently falling back to a default icon.
+- [x] A placeholder favicon is now in place at
+  [src/app/icon.png](src/app/icon.png) (simple emerald circle + white
+  bolt, on-brand but generic). Swap it for a real square/circular mark
+  once you have a transparent logo export — the circular badge logo you
+  showed earlier would be perfect here.
 - [ ] Add a real `og-image.jpg` (1200×630) to `/public` — referenced in
   [layout.tsx](src/app/layout.tsx) metadata but the file doesn't exist
   yet, so social share previews currently show no image.
 
 ## Content / data
-- [ ] Set the real `siteUrl` in [site-config.ts](src/lib/site-config.ts)
-  — currently `https://www.auselectricalandair.com.au`, unverified as
-  the actual production domain.
+- [x] `siteUrl` in [site-config.ts](src/lib/site-config.ts) is set to
+  the confirmed real domain: `https://www.auselectricalair.com.au`
+  (matches the Google Business Profile listing).
 - [x] `email` in [site-config.ts](src/lib/site-config.ts) is set to the
   real address: `auselectricalandair@gmail.com`.
 - [ ] Replace the placeholder years-of-experience figure ("10+ Years
   Experience") in [src/data/about.ts](src/data/about.ts) with Nick's
   actual number of years in the trade.
-- [x] Both testimonials in [src/data/testimonials.ts](src/data/testimonials.ts)
-  are now real reviews (George C. and Elaine T.) — no placeholders left.
-  Add more real reviews here as they come in.
+- [x] All 6 testimonials in [src/data/testimonials.ts](src/data/testimonials.ts)
+  are real reviews — no placeholders left. They automatically feed the
+  `aggregateRating`/`review` schema in [JsonLd.tsx](src/components/JsonLd.tsx),
+  so adding more real reviews here keeps the structured data accurate too.
 - [ ] Double-check the structured address fields in
   [site-config.ts](src/lib/site-config.ts) (`addressStreet`,
   `addressSuburb`, `addressState`, `addressPostcode`, `addressCountry`)
@@ -56,8 +60,32 @@ this site goes live for a real customer.
   Search Console (and Bing Webmaster Tools) and verify `/robots.txt`
   resolves correctly against the production URL.
 - [ ] Re-run the structured data through Google's Rich Results Test
-  after swapping in the real address/logo, to confirm the
-  `Electrician` schema still validates.
+  after swapping in the real address/logo, to confirm the schema still
+  validates.
+- [x] SEO foundation pass complete: merged `Electrician`/`HVACBusiness`
+  schema with real `aggregateRating`/`review` data, added `WebSite`
+  schema, per-service `Service` + `BreadcrumbList` schema, a 37-question
+  FAQ dataset with `FAQPage` schema (general FAQs on the homepage,
+  service-specific FAQs on each `/services/[slug]` page), canonical URLs
+  on every page, `manifest.json`, and `llms.txt`. See
+  [src/data/faqs.ts](src/data/faqs.ts) and
+  [src/components/JsonLd.tsx](src/components/JsonLd.tsx).
+- [x] Scoped-down local SEO batch complete instead of a full 15-suburb
+  rebuild: real `/contact` page (with its own form + `ContactPage`
+  schema), `/privacy-policy` and `/terms` pages, and 4 genuinely
+  differentiated suburb pages under `/service-areas/[slug]` (Lugarno,
+  Peakhurst, Hurstville, Mortdale) — each with real local context rather
+  than templated filler, to avoid the thin-content risk of doing all 15
+  at once. All linked from the Footer and included in the sitemap.
+- [ ] **Still deferred (bigger scope, its own project):** the remaining
+  11 suburbs from the original brief (Oatley, Penshurst, Riverwood,
+  Padstow, Revesby, Menai, Bangor, Miranda, Sutherland, Blakehurst,
+  Connells Point) if/when the first 4 show results worth expanding on; a
+  real Blog/Advice Centre with published articles (currently just a
+  `noindex` placeholder); a dedicated `/about` page; and
+  renaming/restructuring services into categories like "Emergency
+  Electrician" and "Air Conditioning Services" as standalone pages
+  rather than items in the current 12-service grid.
 
 ## Routes not yet real
 - [ ] `/booking` — currently a "Coming soon" placeholder, marked
@@ -83,7 +111,7 @@ included in the sitemap as-is.
   submission fails in production with "Quote form is not configured yet."
 - [ ] The route currently sends from Resend's shared sandbox address
   (`onboarding@resend.dev`), which works without any domain setup. For a
-  more professional "from" address (e.g. `noreply@auselectricalandair.com.au`)
+  more professional "from" address (e.g. `noreply@auselectricalair.com.au`)
   and better inbox deliverability, verify the real domain in the Resend
   dashboard and update the `from` field in
   [src/app/api/quote/route.ts](src/app/api/quote/route.ts).
