@@ -78,7 +78,7 @@ export default function Navbar() {
             alt={siteConfig.businessName}
             width={1283}
             height={378}
-            className="h-[60px] w-auto"
+            className="h-[80px] w-auto"
             style={{ width: "auto" }}
             priority
           />
