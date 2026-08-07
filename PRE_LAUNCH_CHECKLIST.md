@@ -11,24 +11,25 @@ this site goes live for a real customer.
 - [x] Nick doesn't want his photo used. The About section now shows a
   stat panel (years experience + name) instead of a portrait — no photo
   needed here.
-- [ ] The navbar currently uses a text wordmark ("AUS Electrical", from
-  `siteConfig.shortName`) rather than an image logo. If a real logo file
-  is designed, swap the wordmark in [Navbar.tsx](src/components/Navbar.tsx)
-  for an `<Image>` — decide this deliberately rather than defaulting to
-  it.
-- [ ] Replace `/public/logo.png` with the real AUS Electrical & Air
-  Service logo — it's no longer used in the navbar, but is still
-  referenced as the schema.org `image` in
-  [JsonLd.tsx](src/components/JsonLd.tsx).
+- [x] Real logo is now wired into the navbar
+  ([Navbar.tsx](src/components/Navbar.tsx)) using two variants: the
+  full-colour version (`public/images/logo-color.png`) on the
+  scrolled/glass nav background, and a white "reversed" version
+  (`public/images/logo-white.png`) on the transparent nav over the hero
+  photo. Both were verified transparent and legible against real
+  navbar backgrounds before wiring in — the first logo export supplied
+  didn't have a usable dark-background variant, so a proper reversed
+  export was requested and used instead.
+- [x] `/public/logo.png` (the schema.org `image` in
+  [JsonLd.tsx](src/components/JsonLd.tsx)) now uses the real full-colour
+  logo instead of the placeholder.
 - [ ] Add real photos for each service's `heroImage` field in
   [src/data/services.ts](src/data/services.ts) — the field exists in the
   data model but isn't wired into the `/services/[slug]` page template
   yet; add the `<Image>` when real photos are available.
-- [x] A placeholder favicon is now in place at
-  [src/app/icon.png](src/app/icon.png) (simple emerald circle + white
-  bolt, on-brand but generic). Swap it for a real square/circular mark
-  once you have a transparent logo export — the circular badge logo you
-  showed earlier would be perfect here.
+- [x] Favicon ([src/app/icon.png](src/app/icon.png)) now uses the real
+  icon mark (map + lightning bolt) cropped from the new logo, replacing
+  the earlier generic placeholder.
 - [ ] Add a real `og-image.jpg` (1200×630) to `/public` — referenced in
   [layout.tsx](src/app/layout.tsx) metadata but the file doesn't exist
   yet, so social share previews currently show no image.

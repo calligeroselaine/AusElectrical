@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Phone, X } from "lucide-react";
@@ -71,13 +72,16 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-8xl items-center justify-between px-6 py-4 md:px-10">
-        <Link
-          href="#hero"
-          className={`whitespace-nowrap font-display text-sm font-bold tracking-tight transition-colors duration-200 sm:text-lg md:text-xl ${
-            scrolled ? "text-slate" : "text-white"
-          }`}
-        >
-          {siteConfig.businessName}
+        <Link href="#hero" className="flex items-center">
+          <Image
+            src={scrolled ? "/images/logo-color.png" : "/images/logo-white.png"}
+            alt={siteConfig.businessName}
+            width={1283}
+            height={378}
+            className="h-6 w-auto sm:h-7 md:h-8"
+            style={{ width: "auto", height: "auto" }}
+            priority
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
