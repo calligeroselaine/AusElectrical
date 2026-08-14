@@ -97,9 +97,12 @@ export default function PrivacyPolicyPage() {
             Cookies and tracking
           </h2>
           <p className="mt-3">
-            This website does not currently use tracking or advertising
-            cookies, and does not run third-party analytics or advertising
-            scripts.
+            This website uses Vercel Analytics to understand overall visitor
+            numbers and which pages are popular. It's a privacy-friendly,
+            cookieless analytics tool — it doesn't use cookies, doesn't track
+            you across other websites, and doesn't collect personally
+            identifiable information. We don't run any advertising trackers
+            or third-party marketing pixels on this site.
           </p>
         </section>
 

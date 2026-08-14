@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Inter, Manrope } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import { siteConfig } from "@/lib/site-config";
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body>
         <JsonLd />
         {children}
+        <Analytics />
       </body>
     </html>
   );
