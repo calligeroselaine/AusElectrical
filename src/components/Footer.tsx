@@ -125,6 +125,17 @@ export default function Footer() {
             </Link>
           </div>
         </div>
+        <p className="mt-4 text-[11px] text-white/40">
+          Website by{" "}
+          <a
+            href="https://gevantage.com.au"
+            target="_blank"
+            rel="noopener"
+            className="underline-offset-2 transition-colors duration-200 hover:text-white/70 hover:underline"
+          >
+            Gevantage
+          </a>
+        </p>
       </div>
     </footer>
   );
