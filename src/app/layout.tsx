@@ -42,7 +42,6 @@ export const metadata: Metadata = {
     siteName: siteConfig.businessName,
     title: `${siteConfig.businessName} | Electricians in Lugarno & Sydney`,
     description: siteConfig.tagline,
-    // TODO: add a real 1200x630 og-image.jpg to /public before launch
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: {

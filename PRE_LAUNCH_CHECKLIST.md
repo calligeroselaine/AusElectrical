@@ -30,9 +30,9 @@ this site goes live for a real customer.
 - [x] Favicon ([src/app/icon.png](src/app/icon.png)) now uses the real
   icon mark (map + lightning bolt) cropped from the new logo, replacing
   the earlier generic placeholder.
-- [ ] Add a real `og-image.jpg` (1200×630) to `/public` — referenced in
-  [layout.tsx](src/app/layout.tsx) metadata but the file doesn't exist
-  yet, so social share previews currently show no image.
+- [x] `public/og-image.jpg` (1200×630) exists — a generated brand card
+  (logo, headline, phone). Swap in a real photo-based card later if you
+  get good job/van photography.
 
 ## Content / data
 - [x] `siteUrl` in [site-config.ts](src/lib/site-config.ts) is set to
