@@ -48,31 +48,35 @@ export async function POST(request: Request) {
     );
   }
 
-  const resend = new Resend(apiKey);
+  const sendFailedMessage = `Sorry, your enquiry could not be sent. Please try again in a moment, or email ${siteConfig.email} directly.`;
 
-  const { error } = await resend.emails.send({
-    from: `${siteConfig.businessName} Website <onboarding@resend.dev>`,
-    to: siteConfig.email,
-    replyTo: email,
-    subject: `Quote request from ${name}`,
-    text: [
-      `Name: ${name}`,
-      `Phone: ${phone}`,
-      `Email: ${email}`,
-      `Suburb: ${suburb}`,
-      `Service needed: ${service}`,
-      "",
-      "Details:",
-      details || "(none provided)",
-    ].join("\n"),
-  });
+  try {
+    const resend = new Resend(apiKey);
 
-  if (error) {
-    console.error("Resend error:", error);
-    return NextResponse.json(
-      { error: "Something went wrong sending your request. Please call us instead." },
-      { status: 502 },
-    );
+    const { error } = await resend.emails.send({
+      from: `${siteConfig.businessName} Website <onboarding@resend.dev>`,
+      to: siteConfig.email,
+      replyTo: email,
+      subject: `Quote request from ${name}`,
+      text: [
+        `Name: ${name}`,
+        `Phone: ${phone}`,
+        `Email: ${email}`,
+        `Suburb: ${suburb}`,
+        `Service needed: ${service}`,
+        "",
+        "Details:",
+        details || "(none provided)",
+      ].join("\n"),
+    });
+
+    if (error) {
+      console.error("Resend error:", error);
+      return NextResponse.json({ error: sendFailedMessage }, { status: 502 });
+    }
+  } catch (error) {
+    console.error("Quote send failed:", error);
+    return NextResponse.json({ error: sendFailedMessage }, { status: 502 });
   }
 
   return NextResponse.json({ success: true });

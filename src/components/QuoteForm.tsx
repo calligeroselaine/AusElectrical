@@ -7,6 +7,8 @@ import { siteConfig } from "@/lib/site-config";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
+const sendFailedMessage = `Sorry, your enquiry could not be sent. Please try again in a moment, or email ${siteConfig.email} directly.`;
+
 export default function QuoteForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -37,16 +39,18 @@ export default function QuoteForm() {
 
       if (!response.ok) {
         const data = await response.json().catch(() => null);
-        throw new Error(data?.error ?? "Something went wrong. Please try again.");
+        setStatus("error");
+        setErrorMessage(data?.error ?? sendFailedMessage);
+        return;
       }
 
       setStatus("success");
       form.reset();
-    } catch (error) {
+    } catch {
+      // Network failure etc. Fields are uncontrolled and never reset on error,
+      // so everything the visitor typed is still in place.
       setStatus("error");
-      setErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong. Please try again.",
-      );
+      setErrorMessage(sendFailedMessage);
     }
   };
 
