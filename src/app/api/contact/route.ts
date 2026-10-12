@@ -50,7 +50,7 @@ export async function POST(request: Request) {
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-      from: `${siteConfig.businessName} Website <onboarding@resend.dev>`,
+      from: `${siteConfig.businessName} Website <${siteConfig.formFromEmail}>`,
       to: siteConfig.email,
       replyTo: email,
       subject: `New contact form message from ${name}`,

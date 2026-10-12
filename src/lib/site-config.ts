@@ -5,6 +5,8 @@ export const siteConfig = {
   phoneDisplay: "0403 337 877",
   phoneHref: "tel:+61403337877",
   email: "auselectricalandair@gmail.com",
+  // Sender for website form notifications — must be on the domain verified in Resend.
+  formFromEmail: "noreply@auselectricalair.com.au",
   abn: "98414090797",
   licenceNo: "172584 C",
   address: "929 Forest Rd, Lugarno NSW 2210",

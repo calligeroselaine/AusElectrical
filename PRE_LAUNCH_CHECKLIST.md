@@ -110,9 +110,5 @@ included in the sitemap as-is.
 - [ ] **Add `RESEND_API_KEY` in Vercel too** — Project Settings →
   Environment Variables → same value as `.env.local` — otherwise every
   submission fails in production with "Quote form is not configured yet."
-- [ ] The route currently sends from Resend's shared sandbox address
-  (`onboarding@resend.dev`), which works without any domain setup. For a
-  more professional "from" address (e.g. `noreply@auselectricalair.com.au`)
-  and better inbox deliverability, verify the real domain in the Resend
-  dashboard and update the `from` field in
-  [src/app/api/quote/route.ts](src/app/api/quote/route.ts).
+- [x] Form emails send from `noreply@auselectricalair.com.au` (domain verified in
+  Resend; set via `formFromEmail` in [site-config.ts](src/lib/site-config.ts)).
