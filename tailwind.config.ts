@@ -21,10 +21,21 @@ const config: Config = {
           dark: "#AD8A52",
         },
         mist: "#F5F5F3",
+        // Lit-window colour sampled from the original hero image.
+        lamp: "#FFC478",
         slate: {
           DEFAULT: "#26292B",
           muted: "#5B615E",
         },
+      },
+      keyframes: {
+        "window-on": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+      },
+      animation: {
+        "window-on": "window-on 0.2s ease-out forwards",
       },
       fontFamily: {
         sans: ["var(--font-inter)", "sans-serif"],

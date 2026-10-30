@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronDown, Phone, ShieldCheck } from "lucide-react";
+import HeroHouseLights from "@/components/HeroHouseLights";
 import { siteConfig } from "@/lib/site-config";
 
 const containerVariants = {
@@ -26,6 +28,30 @@ const itemVariants = {
 };
 
 export default function Hero() {
+  // The window lights start once the dark base photo is on screen.
+  const baseRef = useRef<HTMLImageElement>(null);
+  const [baseLoaded, setBaseLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = baseRef.current;
+    const start = () => setBaseLoaded(true);
+
+    // Check the <img> ourselves rather than relying on next/image's onLoad,
+    // which can be late for an image that finished loading before hydration.
+    if (img?.complete && img.naturalWidth > 0) {
+      start();
+    } else {
+      img?.addEventListener("load", start, { once: true });
+    }
+
+    // Last resort: never leave the house dark if the load event is missed.
+    const timer = window.setTimeout(start, 3000);
+    return () => {
+      img?.removeEventListener("load", start);
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <section
       id="hero"
@@ -33,12 +59,14 @@ export default function Hero() {
     >
       {/* TODO: replace with a real licensed photo of a modern Australian home exterior before launch */}
       <Image
-        src="/images/hero-home.jpg"
+        src="/images/hero-house-dark.png"
         alt="Modern Australian home exterior at dusk with warm interior lighting"
         fill
         priority
         className="object-cover"
+        ref={baseRef}
       />
+      <HeroHouseLights active={baseLoaded} />
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-charcoal/60 to-charcoal/80" />
 
       <motion.div

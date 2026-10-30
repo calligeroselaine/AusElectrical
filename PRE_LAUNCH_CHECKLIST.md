@@ -5,9 +5,12 @@ Nothing here blocks development, but all of it should be resolved before
 this site goes live for a real customer.
 
 ## Images
-- [ ] Replace `/public/images/hero-home.jpg` with a real, licensed photo
-  of a modern Australian home exterior at dusk (used in
-  [Hero.tsx](src/components/Hero.tsx)).
+- [ ] The hero is currently an illustrated house (`/public/images/hero-house-dark.png`)
+  with six windows that light up in sequence
+  ([HeroHouseLights.tsx](src/components/HeroHouseLights.tsx)). If you swap it
+  for a real photo, the window positions in that component are measured for
+  this illustration and must be re-measured. `hero-home.jpg` is the original
+  all-lit version and is no longer used.
 - [x] Nick doesn't want his photo used. The About section now shows a
   stat panel (years experience + name) instead of a portrait — no photo
   needed here.
