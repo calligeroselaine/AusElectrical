@@ -21,8 +21,13 @@ const config: Config = {
           dark: "#AD8A52",
         },
         mist: "#F5F5F3",
+        // Flat foreground colour of the hero photo, so the scene blends into the page below it.
+        ground: "#121412",
         // Lit-window colour sampled from the original hero image.
-        lamp: "#FFC478",
+        lamp: {
+          DEFAULT: "#FFC478",
+          light: "#FFE6BD",
+        },
         slate: {
           DEFAULT: "#26292B",
           muted: "#5B615E",

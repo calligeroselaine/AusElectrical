@@ -27,6 +27,11 @@ const itemVariants = {
   },
 };
 
+// The house scene box. On phones it is a fixed-height strip at the top (so the
+// windows stay clear of the text below); from md up it fills the hero.
+const SCENE_BOX =
+  "absolute inset-x-0 top-0 h-[clamp(380px,58svh,520px)] md:inset-0 md:h-auto";
+
 export default function Hero() {
   // The window lights start once the dark base photo is on screen.
   const baseRef = useRef<HTMLImageElement>(null);
@@ -55,27 +60,32 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden bg-charcoal"
+      className="relative flex min-h-[max(100svh,780px)] items-end overflow-hidden bg-ground pb-16 md:min-h-[max(100svh,820px)]"
     >
       {/* TODO: replace with a real licensed photo of a modern Australian home exterior before launch */}
-      <Image
-        src="/images/hero-house-dark.png"
-        alt="Modern Australian home exterior at dusk with warm interior lighting"
-        fill
-        priority
-        className="object-cover"
-        ref={baseRef}
-      />
-      <HeroHouseLights active={baseLoaded} />
+      <div className={SCENE_BOX}>
+        <Image
+          src="/images/hero-house-dark.png"
+          alt="Modern Australian home exterior at dusk with warm interior lighting"
+          fill
+          priority
+          className="object-cover"
+          ref={baseRef}
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal/55 via-charcoal/60 to-charcoal/80" />
+      {/* Window lights sit above the dark gradient so they glow at full strength. */}
+      <div className={`${SCENE_BOX} pointer-events-none`}>
+        <HeroHouseLights active={baseLoaded} />
+      </div>
 
       <motion.div
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="relative mx-auto max-w-8xl px-6 md:px-10"
+        className="relative mx-auto w-full max-w-8xl px-6 md:px-10"
       >
-        <div className="max-w-2xl">
+        <div className="max-w-5xl">
           <motion.div
             variants={itemVariants}
             className="flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-gold"
@@ -86,21 +96,21 @@ export default function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="mt-6 text-4xl font-bold leading-tight tracking-tight text-white md:text-6xl"
+            className="mt-4 text-[2rem] font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
           >
             Powering Sydney With Quality Electrical Solutions
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 max-w-[600px] text-lg leading-relaxed text-white/90"
+            className="mt-4 max-w-[600px] text-lg leading-relaxed text-white/90"
           >
             {siteConfig.tagline}
           </motion.p>
 
           <motion.div
             variants={itemVariants}
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+            className="mt-7 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <a
               href={siteConfig.phoneHref}
@@ -120,7 +130,7 @@ export default function Hero() {
           <motion.a
             href={siteConfig.phoneHref}
             variants={itemVariants}
-            className="mt-8 inline-flex items-center gap-2 text-sm text-white/80 transition-colors duration-200 hover:text-white"
+            className="mt-5 inline-flex items-center gap-2 text-sm text-white/80 transition-colors duration-200 hover:text-white"
           >
             <Phone className="h-4 w-4" aria-hidden="true" />
             {siteConfig.phoneDisplay}
