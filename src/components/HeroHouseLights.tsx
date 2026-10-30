@@ -81,7 +81,7 @@ export default function HeroHouseLights({ active }: { active: boolean }) {
                 width={w + 28}
                 height={h + 20}
                 className="fill-lamp"
-                opacity={0.45}
+                opacity={0.22}
                 filter="url(#hero-bloom)"
               />
               <rect
@@ -90,7 +90,7 @@ export default function HeroHouseLights({ active }: { active: boolean }) {
                 width={w + 6}
                 height={h + 6}
                 className="fill-lamp"
-                opacity={0.8}
+                opacity={0.42}
                 filter="url(#hero-halo)"
               />
               {/* the lit pane */}
@@ -101,6 +101,7 @@ export default function HeroHouseLights({ active }: { active: boolean }) {
                 width={w}
                 height={h}
                 className="fill-lamp"
+                opacity={0.8}
               />
               {/* hotter centre, like a bright room behind the glass */}
               <rect
@@ -109,7 +110,7 @@ export default function HeroHouseLights({ active }: { active: boolean }) {
                 width={w * 0.6}
                 height={h * 0.68}
                 className="fill-lamp-light"
-                opacity={0.9}
+                opacity={0.35}
                 filter="url(#hero-core)"
               />
             </g>
